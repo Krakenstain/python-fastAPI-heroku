@@ -1,7 +1,6 @@
 import asyncio
 
 from fastapi import WebSocket, APIRouter
-from websockets.exceptions import ConnectionClosedOK
 
 router = APIRouter(
     prefix="/api/v1/websock",
@@ -21,7 +20,7 @@ async def websocket_endpoint(
                 message = await websocket.receive_text()
                 await websocket.send_text(message)
                 print(message)
-            except ConnectionClosedOK:
+            except websocket.exceptions.ConnectionClosedOK:
                 print("Websocket disconnected")
                 break
 

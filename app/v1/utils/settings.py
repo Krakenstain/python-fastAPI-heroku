@@ -16,10 +16,9 @@ class Settings(BaseSettings):
     db_port: str = os.getenv('DB_PORT')
 
     ## REDIS
-    redis_host: str = os.getenv('REDIS_HOST')
-    redis_port: str = os.getenv('REDIS_PORT')
-    redis_db: str = os.getenv('REDIS_DB')
-    
+    redis_url: str = os.getenv('REDIS_URL')
+    redis_url_ssl: str = os.getenv('REDIS_URL_SSL')
+
     ## Variables JWT
     secret_key: str = os.getenv('SECRET_KEY')
     token_expire: int = os.getenv('USER_ACCESS_TOKEN_EXPIRE_MINUTES')

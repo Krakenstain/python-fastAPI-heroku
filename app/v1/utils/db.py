@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from urllib.parse import urlparse
+
 import redis
 from fastapi import HTTPException, status
 from sqlalchemy import create_engine
@@ -15,14 +17,21 @@ DB_PASS = settings.db_pass
 DB_HOST = settings.db_host
 DB_PORT = settings.db_port
 
-REDIS_HOST = settings.redis_host
-REDIS_PORT = settings.redis_port
-REDIS_DB = settings.redis_db
+REDIS_URL = settings.redis_url
+REDIS_URL_SSL = settings.redis_url_ssl
+
+
 
 
 ### REDIS ###
 def get_redis():
-    r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+    if REDIS_URL_SSL:
+        url = urlparse(REDIS_URL)
+        r = redis.Redis(host=url.hostname, port=url.port, username=url.username, password=url.password, ssl=True,
+                        ssl_cert_reqs=None)
+    else:
+        r = redis.from_url(REDIS_URL)
+
     return r
 
 redis_session = get_redis()
