@@ -1,0 +1,14 @@
+version: 2
+updates:
+# Maintain dependencies for Python Project
+- package-ecosystem: pip
+  directory: "/."
+  schedule:
+    interval: weekly
+  rebase-strategy: disabled
+  open-pull-requests-limit: 10
+  target-branch: main
+  reviewers:
+  - yoandysse
+  assignees:
+  - yoandysse
