@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.v1.router.auth_router import router as auth_router
 from app.v1.router.router import router as test_router
+from app.v1.router.websock_server import router as websock_server_router
 
 
 
@@ -25,4 +26,5 @@ app.add_middleware(
 ## Routers
 app.include_router(auth_router)
 app.include_router(test_router)
+app.include_router(websock_server_router)
 
