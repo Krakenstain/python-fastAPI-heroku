@@ -24,9 +24,7 @@ router = APIRouter(
     dependencies=[Depends(get_db)],
     summary="Create a new user"
 )
-def create_user(
-        current_user: User = Depends(get_current_user),
-        user: user_schema.UserRegister = Body(...)):
+async def create_user(user: user_schema.UserRegister = Body(...)):
     """
 
     ### Args
@@ -50,7 +48,7 @@ def create_user(
     status_code=status.HTTP_200_OK,
     summary="Login user"
 )
-def login_for_access_token(user: user_schema.UserLogin = Body(...)):
+async def login_for_access_token(user: user_schema.UserLogin = Body(...)):
     """
 
     ### Args
